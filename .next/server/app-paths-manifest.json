@@ -1,0 +1,8 @@
+{
+  "/not-found": "app/not-found.js",
+  "/page": "app/page.js",
+  "/herramientas/page": "app/herramientas/page.js",
+  "/herramientas/metronomo/page": "app/herramientas/metronomo/page.js",
+  "/herramientas/mapa-de-beats/page": "app/herramientas/mapa-de-beats/page.js",
+  "/herramientas/nota-pedal/page": "app/herramientas/nota-pedal/page.js"
+}
