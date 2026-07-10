@@ -1,110 +1,108 @@
 import React from 'react';
 import Link from 'next/link';
+import { Accented } from '../components/ui/SectionHeading';
+import { ButtonLink } from '../components/ui/Button';
 
 const herramientas = [
   {
     name: 'Metrónomo',
     path: '/herramientas/metronomo',
-    description: 'Metrónomo avanzado con múltiples compases, subdivisiones y tipos de sonido. Ideal para practicar con precisión rítmica.',
+    description:
+      'Metrónomo avanzado con múltiples compases, subdivisiones y tipos de sonido. Ideal para practicar con precisión rítmica.',
     icon: '⏱️',
+    accent: '#CFF54B',
     disponible: true,
   },
   {
     name: 'Mapa de Beats',
     path: '/herramientas/mapa-de-beats',
-    description: 'Visualiza y crea patrones rítmicos personalizados. Configura acentos y métricas para diferentes compases.',
+    description:
+      'Visualizá y creá patrones rítmicos personalizados. Configurá acentos y métricas para diferentes compases.',
     icon: '🥁',
+    accent: '#FF5470',
     disponible: true,
   },
   {
     name: 'Nota Pedal',
     path: '/herramientas/nota-pedal',
-    description: 'Genera secuencias musicales con nota pedal. Experimenta con diferentes grados y acordes sobre una nota base.',
+    description:
+      'Generá secuencias musicales con nota pedal. Experimentá con distintos grados y acordes sobre una nota base.',
     icon: '🎹',
+    accent: '#56E1E9',
     disponible: true,
   },
   {
     name: 'Afinador',
     path: '/herramientas/afinador',
-    description: 'Afinador de instrumentos con detección de frecuencia. Próximamente disponible.',
+    description: 'Afinador de instrumentos con detección de frecuencia.',
     icon: '🎵',
+    accent: '#FF9F45',
     disponible: false,
   },
   {
     name: 'Batería',
     path: '/herramientas/bateria',
-    description: 'Batería virtual interactiva. Próximamente disponible.',
+    description: 'Batería virtual interactiva y caja de ritmos.',
     icon: '🥁',
+    accent: '#9A94AD',
     disponible: false,
   },
 ];
 
 export default function HerramientasPage() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
-<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 sm:text-5xl md:text-6xl mb-4">
-            Herramientas Musicales
+    <main className="px-[clamp(20px,5vw,72px)] py-[clamp(56px,8vw,110px)]">
+      <div className="mx-auto max-w-content">
+        <div className="mb-[clamp(40px,6vw,72px)] max-w-[52ch]">
+          <div className="mb-4 text-xs uppercase tracking-[0.22em] text-pink">Herramientas</div>
+          <h1 className="font-display text-[clamp(34px,5vw,64px)] font-bold leading-none tracking-tight text-balance">
+            Instrumentos que <Accented accent="pink">responden</Accented>
           </h1>
-          <p className="mt-3 max-w-2xl mx-auto text-base text-gray-600 sm:text-lg md:text-xl">
-            Utiliza nuestras herramientas interactivas para mejorar tu práctica musical y comprensión de la teoría.
+          <p className="mt-5 text-base leading-relaxed text-ink-2">
+            Herramientas interactivas para mejorar tu práctica y tu comprensión de la teoría.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {herramientas.map((herramienta, idx) => (
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {herramientas.map((h) => (
             <div
-              key={idx}
-              className={`bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 p-6 ${
-                !herramienta.disponible ? 'opacity-75' : ''
+              key={h.name}
+              className={`flex flex-col rounded-[18px] border border-line bg-panel p-6 ${
+                h.disponible ? '' : 'opacity-70'
               }`}
             >
-              <div className="flex items-center mb-4">
-                <span className="text-4xl mr-3">{herramienta.icon}</span>
+              <div className="mb-4 flex items-center gap-3">
+                <span
+                  className="flex h-12 w-12 items-center justify-center rounded-[14px] text-2xl"
+                  style={{ background: `${h.accent}1f` }}
+                >
+                  {h.icon}
+                </span>
                 <div>
-                  <h2 className="text-xl font-bold text-purple-800">
-                    {herramienta.name}
+                  <h2 className="font-display text-xl font-bold" style={{ color: h.accent }}>
+                    {h.name}
                   </h2>
-                  {!herramienta.disponible && (
-                    <span className="text-xs text-gray-500 bg-yellow-100 px-2 py-1 rounded">
+                  {!h.disponible && (
+                    <span className="text-[11px] font-semibold uppercase tracking-wider text-ink-4">
                       Próximamente
                     </span>
                   )}
                 </div>
               </div>
-              <p className="text-gray-600 mb-4 text-sm">
-                {herramienta.description}
-              </p>
-              {herramienta.disponible ? (
-                <Link
-                  href={herramienta.path}
-                  className="inline-flex items-center px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors duration-200 text-sm font-medium"
-                >
+              <p className="mb-6 flex-1 text-sm leading-relaxed text-ink-2">{h.description}</p>
+              {h.disponible ? (
+                <ButtonLink href={h.path} size="md" className="self-start">
                   Usar herramienta →
-                </Link>
+                </ButtonLink>
               ) : (
-                <button
-                  disabled
-                  className="inline-flex items-center px-4 py-2 bg-gray-300 text-gray-500 rounded-md cursor-not-allowed text-sm font-medium"
-                >
-                  No disponible
-                </button>
+                <span className="self-start rounded-pill border border-line px-4 py-2 text-sm text-ink-4">
+                  Pronto
+                </span>
               )}
             </div>
           ))}
-        </div>
-
-        <div className="mt-12 text-center">
-          <Link
-            href="/"
-            className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 transition-colors"
-          >
-            ← Volver al Inicio
-          </Link>
         </div>
       </div>
     </main>
   );
 }
-

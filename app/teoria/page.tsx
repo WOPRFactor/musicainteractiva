@@ -1,5 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
+import { Accented } from '../components/ui/SectionHeading';
+
+const accents = ['#CFF54B', '#56E1E9', '#FF5470', '#FF9F45', '#CFF54B', '#56E1E9'];
 
 const teoriaCategorias = [
   {
@@ -76,7 +79,7 @@ function slugify(str: string) {
   return str
     .toLowerCase()
     .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[̀-ͯ]/g, '')
     .replace(/ /g, '-')
     .replace(/[^a-z0-9-]/g, '')
     .replace(/\(/g, '')
@@ -85,56 +88,47 @@ function slugify(str: string) {
 
 export default function TeoriaPage() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
-<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 sm:text-5xl md:text-6xl mb-4">
-            Teoría Musical
+    <main className="px-[clamp(20px,5vw,72px)] py-[clamp(56px,8vw,110px)]">
+      <div className="mx-auto max-w-content">
+        <div className="mb-[clamp(40px,6vw,72px)] max-w-[52ch]">
+          <div className="mb-4 text-xs uppercase tracking-[0.22em] text-cyan">Teoría · 36 capítulos</div>
+          <h1 className="font-display text-[clamp(34px,5vw,64px)] font-bold leading-none tracking-tight text-balance">
+            De la primera nota al <Accented accent="cyan">serialismo</Accented>
           </h1>
-          <p className="mt-3 max-w-2xl mx-auto text-base text-gray-600 sm:text-lg md:text-xl">
-            Explora nuestros contenidos organizados por categorías. Desde conceptos básicos hasta técnicas avanzadas de jazz y música contemporánea.
+          <p className="mt-5 text-base leading-relaxed text-ink-2">
+            Contenidos organizados por categoría, de los conceptos básicos a las técnicas avanzadas de jazz y
+            música contemporánea.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {teoriaCategorias.map((categoria, catIdx) => (
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {teoriaCategorias.map((categoria, i) => (
             <div
-              key={catIdx}
-              className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 p-6"
+              key={categoria.name}
+              className="rounded-[18px] border border-line bg-panel p-6 transition-colors hover:border-[rgba(244,241,234,0.2)]"
             >
-              <h2 className="text-xl font-bold text-purple-800 mb-4 pb-2 border-b-2 border-purple-200">
+              <h2
+                className="mb-4 border-b border-line pb-3 font-display text-lg font-bold"
+                style={{ color: accents[i % accents.length] }}
+              >
                 {categoria.name}
               </h2>
-              <ul className="space-y-2">
-                {categoria.temas.map((tema, temaIdx) => {
-                  const slug = slugify(tema);
-                  return (
-                    <li key={temaIdx}>
-                      <Link
-                        href={`/teoria/${slug}`}
-                        className="text-gray-700 hover:text-purple-600 hover:underline transition-colors duration-200 block py-1"
-                      >
-                        {tema}
-                      </Link>
-                    </li>
-                  );
-                })}
+              <ul className="flex flex-col gap-1">
+                {categoria.temas.map((tema) => (
+                  <li key={tema}>
+                    <Link
+                      href={`/teoria/${slugify(tema)}`}
+                      className="block rounded py-1 text-sm text-ink-2 transition-colors hover:text-lime"
+                    >
+                      {tema}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
           ))}
-        </div>
-
-        <div className="mt-12 text-center">
-          <Link
-            href="/"
-            className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 transition-colors"
-          >
-            ← Volver al Inicio
-          </Link>
         </div>
       </div>
     </main>
   );
 }
-
-
