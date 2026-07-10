@@ -2,12 +2,68 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ==========================================================================
+   EMION — base global (identidad oscura tomada del rediseño)
+   ========================================================================== */
+
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-rgb: 255, 255, 255;
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-rgb));
-} 
+  background: #0B0A14;
+  color: #F4F1EA;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: #CFF54B;
+  color: #0B0A14;
+}
+
+/* Foco visible y accesible en toda la app */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid #CFF54B;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Utilidades de composición reutilizables ------------------------------- */
+@layer components {
+  .container-emion {
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: clamp(20px, 5vw, 72px);
+  }
+
+  /* Grilla animada de fondo del hero */
+  .hero-grid {
+    background-image:
+      linear-gradient(rgba(244, 241, 234, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(244, 241, 234, 0.035) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(ellipse 80% 70% at 60% 40%, #000 20%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 70% at 60% 40%, #000 20%, transparent 80%);
+  }
+}
+
+/* Respetar la preferencia de menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
