@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Logo from './ui/Logo';
-import { ButtonLink } from './ui/Button';
+import AccountNav from './AccountNav';
 
 /**
  * Enlaces principales. `soon: true` marca secciones aún no construidas
@@ -57,9 +57,7 @@ export default function Navbar() {
         </div>
 
         <div className="hidden md:block">
-          <ButtonLink href="/teoria" size="md">
-            Empezá gratis
-          </ButtonLink>
+          <AccountNav />
         </div>
 
         {/* Mobile toggle */}
@@ -105,9 +103,9 @@ export default function Navbar() {
                 </Link>
               )
             )}
-            <ButtonLink href="/teoria" size="md" className="mt-3 w-full">
-              Empezá gratis
-            </ButtonLink>
+            <div className="mt-3">
+              <AccountNav stacked onNavigate={() => setOpen(false)} />
+            </div>
           </div>
         </div>
       )}
