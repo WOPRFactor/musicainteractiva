@@ -29,3 +29,13 @@ pnpm-debug.log*
 .env.test.local
 .env.production.local
 
+# Backend Python
+backend/.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+backend/instance/
+
